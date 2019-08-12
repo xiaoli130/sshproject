@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+	"http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+
+   
+    <package name="default" namespace="/" extends="struts-default">
+  <interceptors>
+			<interceptor name="myInterceptor" class="com.atguigu.struts2.interceptors.MyInterceptor"></interceptor>
+			<interceptor-stack name="myDefaultInterceptor">
+				<interceptor-ref name="myInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 定义全局Result --> 
+		<global-results>  
+            <!-- 当返回login视图名时，转入登录页面 -->  
+            <result name="input">index.jsp</result>  
+        </global-results>
+        
+		<action name="myLogin" class="com.atguigu.struts2.actions.LoginAction" method="execute">
+			<result name="main">main.jsp</result>
+		</action>
+		
+		<action name="addUser" class="com.atguigu.struts2.actions.OperateAction" method="addUser">
+		<result name="success">hello.jsp</result>
+		<interceptor-ref name="myDefaultInterceptor"></interceptor-ref>
+		</action>
+      
+        <action name="deleteUser" class="com.atguigu.struts2.actions.OperateAction" method="deleteUser">
+		<result name="success">hello.jsp</result>
+		<interceptor-ref name="myDefaultInterceptor"></interceptor-ref>
+		</action>
+      
+        <action name="updateUser" class="com.atguigu.struts2.actions.OperateAction" method="updateUser">
+		<result name="success">hello.jsp</result>
+		<interceptor-ref name="myDefaultInterceptor"></interceptor-ref>
+		</action>
+		
+		<action name="selectUser" class="com.atguigu.struts2.actions.OperateAction" method="selectUser">
+		<result name="success">hello.jsp</result>
+		<interceptor-ref name="myDefaultInterceptor"></interceptor-ref>
+		</action>
+    </package>
+
+</struts>
